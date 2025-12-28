@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threaded Tales | Our Story</title>
     <style>
-        /* Theme Colors */
+        /* 1. THEME COLORS - The "Paint Palette" */
         :root {
             --baby-pink: #F4C2C2;
             --deep-pink: #ef9a9a;
@@ -13,6 +13,7 @@
             --text-grey: #444;
         }
 
+        /* 2. BASE STYLES - The "Foundation" */
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -22,7 +23,7 @@
             scroll-behavior: smooth;
         }
 
-        /* FLOATING TOP BAR */
+        /* 3. NAVIGATION - The "Map" */
         nav {
             position: fixed;
             top: 0;
@@ -49,7 +50,7 @@
             color: var(--baby-pink);
         }
 
-        /* HEADER SECTION */
+        /* 4. HEADER & LOGO */
         header {
             background-color: var(--baby-pink);
             height: 60vh;
@@ -58,15 +59,17 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding-top: 60px; /* Space for floating nav */
+            padding-top: 60px;
         }
 
-        .logo-placeholder {
-            font-size: 80px;
-            margin-bottom: 10px;
+        /* This is the new style for your logo image */
+        .logo-image {
+            height: 120px; 
+            width: auto;
+            margin-bottom: 15px;
         }
 
-        /* STORY SECTION (THE FRONT PAGE FOCUS) */
+        /* 5. STORY SECTION */
         .story-section {
             padding: 80px 15%;
             text-align: center;
@@ -86,7 +89,7 @@
             margin: 0 auto;
         }
 
-        /* PRODUCT SECTION */
+        /* 6. PRODUCT SECTION & CARDS */
         .products-section {
             padding: 60px 10%;
         }
@@ -123,6 +126,23 @@
             color: #ccc;
         }
 
+        /* This is the price style you added! */
+        .product-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--deep-pink);
+            margin: 10px 0;
+            display: block;
+        }
+
+        /* This styles the crossed-out old price */
+        .product-price strike {
+            font-size: 14px;
+            color: #888;
+            margin-right: 5px;
+            font-weight: normal;
+        }
+
         .status-badge {
             display: inline-block;
             padding: 5px 15px;
@@ -131,17 +151,11 @@
             font-weight: bold;
             margin-top: 10px;
         }
-.product-price {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--deep-pink); /* This uses your brand pink */
-    margin: 10px 0;
-    display: block;
-}
+
         .instock { background: #e8f5e9; color: #2e7d32; }
         .outstock { background: #ffebee; color: #c62828; }
 
-        /* CUSTOMIZABLE BANNER */
+        /* 7. CUSTOM INFO & FOOTER */
         .custom-info {
             background-color: var(--baby-pink);
             padding: 40px;
@@ -149,7 +163,6 @@
             margin: 40px 0;
         }
 
-        /* CONTACT FOOTER */
         footer {
             padding: 60px 10%;
             text-align: center;
@@ -169,7 +182,7 @@
     </nav>
 
     <header>
-        <div class="logo-placeholder">🧶</div>
+        <img src="threaded_tales_logo.png" alt="Threaded Tales Logo" class="logo-image">
         <h1>Threaded Tales</h1>
         <p>A Yawning Hook waking up to new stories.</p>
     </header>
@@ -177,55 +190,58 @@
     <section id="story" class="story-section">
         <h2>How It All Began</h2>
         <div class="story-text">
-            <p>Every great tale starts with a single thread. <strong>Threaded Tales</strong> was born in a quiet nursery, inspired by the softest baby pink yarn and the rhythmic click of a crochet hook. It began as a way to turn moments of rest into works of art.</p>
-            <p>Our symbol—the <strong>Yawning Hook</strong>—represents that magical moment of creativity waking up. When a hook strikes the yarn, a story begins to unfold. We believe that every handmade piece carries the warmth and the "tale" of its making, ready to become a part of your story.</p>
+            <p>Every great tale starts with a single thread. <strong>Threaded Tales</strong> was born in a quiet nursery, inspired by the softest baby pink yarn and the rhythmic click of a crochet hook.</p>
+            <p>Our symbol—the <strong>Yawning Hook</strong>—represents that magical moment of creativity waking up.</p>
         </div>
     </section>
 
     <section id="products" class="products-section">
         <h2 style="text-align:center;">The Collection</h2>
         <div class="product-grid">
+            
             <div class="product-card">
                 <div class="image-placeholder">Add Image 1 Here</div>
                 <h3>Baby Tale Blanket</h3>
+                <span class="product-price">₹1,200</span>
                 <p>Signature baby pink soft stitch.</p>
                 <span class="status-badge instock">In Stock</span>
             </div>
+
             <div class="product-card">
-    <img src="chrochet_flower.jpeg" alt="Flower Hairclip" style="width:100%; border-radius:15px;">
-    <h3>Ever-Bloom Hairclip</h3>
-    
-   <span class="product-price"><strike style="font-size: 14px; color: grey;">₹30</strike> ₹15.00</span>
-    
-    <p>Hand-hooked blooms that never fade.</p>
-    <span class="status-badge instock">In Stock</span>
-</div>
+                <img src="chrochet_flower.jpeg" alt="Flower Hairclip" style="width:100%; border-radius:15px;">
+                <h3>Ever-Bloom Hairclip</h3>
+                <span class="product-price"><strike>₹30</strike> ₹15.00</span>
+                <p>Hand-hooked blooms that never fade.</p>
+                <span class="status-badge instock">In Stock</span>
+            </div>
+
             <div class="product-card">
                 <div class="image-placeholder">Add Image 3 Here</div>
                 <h3>Custom Beanie</h3>
+                <span class="product-price">₹450</span>
                 <p>Your choice of colors and size.</p>
                 <span class="status-badge instock">In Stock</span>
             </div>
+
         </div>
 
         <div class="custom-info">
             <h3>✨ Everything is Customizable! ✨</h3>
-            <p>Love a design but want a different color? Every "Threaded Tale" can be tailored specifically to you.</p>
+            <p>Love a design but want a different color? Reach out!</p>
         </div>
     </section>
 
     <footer id="contact">
         <h2>Let's Start Your Tale</h2>
-        <p>Have a question or a custom request? Reach out to us!</p>
-        <p><strong>Email:</strong> hello@threadedtales.com</p>
-        <p><strong>Instagram:</strong> @ThreadedTales_Crochet</p>
+        <p>Email: hello@threadedtales.com</p>
+        <p>Instagram: @ThreadedTales_Crochet</p>
         <br>
         <p style="font-size: 12px; opacity: 0.6;">&copy; 2024 Threaded Tales. Hand-hooked with love.</p>
     </footer>
 
 </body>
-
 </html>
+
 
 
 
