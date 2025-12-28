@@ -171,46 +171,6 @@
         }
 
         footer h2 { color: var(--baby-pink); }
-</style>
-
-<div id="productModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        
-        <div class="modal-left">
-            <img id="modalImg" src="" class="modal-image-tag">
-        </div>
-        
-        <div class="modal-right">
-            <h2 id="modalTitle"></h2>
-            <div id="modalPrice" class="modal-price-big"></div>
-            <p id="modalDesc" class="modal-description"></p>
-            
-            <a href="https://wa.me/YOURNUMBER" class="amazon-buy-btn">Buy Now</a>
-            <p style="font-size: 12px; color: #999; margin-top: 10px; text-align: center;">Secure Checkout via WhatsApp</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    function openProduct(title, price, imgPath, desc) {
-        document.getElementById('modalTitle').innerText = title;
-        document.getElementById('modalPrice').innerText = price;
-        document.getElementById('modalImg').src = imgPath;
-        document.getElementById('modalDesc').innerText = desc;
-        document.getElementById('productModal').style.display = "block";
-        document.body.style.overflow = "hidden"; /* Stops page from scrolling behind popup */
-    }
-
-    function closeModal() {
-        document.getElementById('productModal').style.display = "none";
-        document.body.style.overflow = "auto";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('productModal')) closeModal();
-    }
-</script>
     </style>
 </head>
 <body>
@@ -281,6 +241,7 @@
 
 </body>
 </html>
+
 
 
 
