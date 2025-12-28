@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threaded Tales | Our Story</title>
     <style>
-        /* 1. THEME COLORS - The "Paint Palette" */
+        /* Theme Colors */
         :root {
             --baby-pink: #F4C2C2;
             --deep-pink: #ef9a9a;
@@ -13,7 +13,6 @@
             --text-grey: #444;
         }
 
-        /* 2. BASE STYLES - The "Foundation" */
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -23,7 +22,7 @@
             scroll-behavior: smooth;
         }
 
-        /* 3. NAVIGATION - The "Map" */
+        /* NAVIGATION */
         nav {
             position: fixed;
             top: 0;
@@ -46,11 +45,7 @@
             letter-spacing: 1px;
         }
 
-        nav a:hover {
-            color: var(--baby-pink);
-        }
-
-        /* 4. HEADER & LOGO */
+        /* HEADER */
         header {
             background-color: var(--baby-pink);
             height: 60vh;
@@ -62,38 +57,15 @@
             padding-top: 60px;
         }
 
-        /* This is the new style for your logo image */
         .logo-image {
             height: 120px; 
             width: auto;
             margin-bottom: 15px;
         }
 
-        /* 5. STORY SECTION */
-        .story-section {
-            padding: 80px 15%;
-            text-align: center;
-            background-color: white;
-        }
-
-        .story-section h2 {
-            color: var(--deep-pink);
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        .story-text {
-            font-size: 18px;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* 6. PRODUCT SECTION & CARDS */
-        .products-section {
-            padding: 60px 10%;
-        }
-
+        /* PRODUCT GRID */
+        .products-section { padding: 60px 10%; }
+        
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -108,25 +80,11 @@
             text-align: center;
             border: 1px solid #eee;
             transition: transform 0.3s;
+            cursor: pointer; /* Shows user they can click */
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
+        .product-card:hover { transform: translateY(-10px); }
 
-        .image-placeholder {
-            width: 100%;
-            height: 250px;
-            background-color: #f9f9f9;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            color: #ccc;
-        }
-
-        /* This is the price style you added! */
         .product-price {
             font-size: 20px;
             font-weight: bold;
@@ -135,42 +93,65 @@
             display: block;
         }
 
-        /* This styles the crossed-out old price */
-        .product-price strike {
-            font-size: 14px;
-            color: #888;
-            margin-right: 5px;
-            font-weight: normal;
+        /* POPUP (MODAL) STYLES */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 12px;
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 25px;
+            display: flex; 
+            flex-wrap: wrap; /* Helps on mobile */
+            gap: 30px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-left { flex: 1; min-width: 250px; }
+        .modal-right { flex: 1; min-width: 250px; text-align: left; }
+
+        .modal-image-tag {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
             font-weight: bold;
-            margin-top: 10px;
+            cursor: pointer;
+            color: #aaa;
         }
 
-        .instock { background: #e8f5e9; color: #2e7d32; }
-        .outstock { background: #ffebee; color: #c62828; }
-
-        /* 7. CUSTOM INFO & FOOTER */
-        .custom-info {
-            background-color: var(--baby-pink);
-            padding: 40px;
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        footer {
-            padding: 60px 10%;
-            text-align: center;
-            background-color: #333;
+        .buy-button {
+            background-color: var(--deep-pink);
             color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
         }
 
-        footer h2 { color: var(--baby-pink); }
+        /* FOOTER */
+        footer { padding: 60px 10%; text-align: center; background-color: #333; color: white; }
     </style>
 </head>
 <body>
@@ -182,65 +163,77 @@
     </nav>
 
     <header>
-        <img src="threaded_tales_logo.png" alt="Threaded Tales Logo" class="logo-image">
+        <img src="your-logo.png" alt="Logo" class="logo-image">
         <h1>Threaded Tales</h1>
         <p>A Yawning Hook waking up to new stories.</p>
     </header>
-
-    <section id="story" class="story-section">
-        <h2>How It All Began</h2>
-        <div class="story-text">
-            <p>Every great tale starts with a single thread. <strong>Threaded Tales</strong> was born in a quiet nursery, inspired by the softest baby pink yarn and the rhythmic click of a crochet hook.</p>
-            <p>Our symbol—the <strong>Yawning Hook</strong>—represents that magical moment of creativity waking up.</p>
-        </div>
-    </section>
 
     <section id="products" class="products-section">
         <h2 style="text-align:center;">The Collection</h2>
         <div class="product-grid">
             
-            <div class="product-card">
-                <div class="image-placeholder">Add Image 1 Here</div>
+            <div class="product-card" onclick="openProduct('Baby Tale Blanket', '₹1,200', 'blanket.jpg', 'A cozy, signature soft stitch blanket perfect for nurseries.')">
+                <div style="height:200px; background:#eee; border-radius:15px; display:flex; align-items:center; justify-content:center;">Image Here</div>
                 <h3>Baby Tale Blanket</h3>
                 <span class="product-price">₹1,200</span>
-                <p>Signature baby pink soft stitch.</p>
-                <span class="status-badge instock">In Stock</span>
             </div>
 
-            <div class="product-card">
-                <img src="chrochet_flower.jpeg" alt="Flower Hairclip" style="width:100%; border-radius:15px;">
+            <div class="product-card" onclick="openProduct('Ever-Bloom Hairclip', '₹15.00', 'chrochet_flower.jpeg', 'Hand-hooked blooms that never fade. A perfect accessory for any occasion.')">
+                <img src="chrochet_flower.jpeg" style="width:100%; border-radius:15px;">
                 <h3>Ever-Bloom Hairclip</h3>
-                <span class="product-price"><strike>₹30</strike> ₹15.00</span>
-                <p>Hand-hooked blooms that never fade.</p>
-                <span class="status-badge instock">In Stock</span>
+                <span class="product-price">₹15.00</span>
             </div>
 
-            <div class="product-card">
-                <div class="image-placeholder">Add Image 3 Here</div>
-                <h3>Custom Beanie</h3>
-                <span class="product-price">₹450</span>
-                <p>Your choice of colors and size.</p>
-                <span class="status-badge instock">In Stock</span>
-            </div>
-
-        </div>
-
-        <div class="custom-info">
-            <h3>✨ Everything is Customizable! ✨</h3>
-            <p>Love a design but want a different color? Reach out!</p>
         </div>
     </section>
 
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            
+            <div class="modal-left">
+                <img id="modalImg" src="" class="modal-image-tag">
+            </div>
+            
+            <div class="modal-right">
+                <h2 id="modalTitle" style="margin-top:0;"></h2>
+                <span id="modalPrice" class="product-price"></span>
+                <p id="modalDesc" style="line-height:1.6;"></p>
+                <button class="buy-button">Message to Buy</button>
+            </div>
+        </div>
+    </div>
+
     <footer id="contact">
         <h2>Let's Start Your Tale</h2>
-        <p>Email: hello@threadedtales.com</p>
         <p>Instagram: @ThreadedTales_Crochet</p>
-        <br>
-        <p style="font-size: 12px; opacity: 0.6;">&copy; 2024 Threaded Tales. Hand-hooked with love.</p>
     </footer>
+
+    <script>
+        function openProduct(title, price, imgPath, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalPrice').innerText = price;
+            document.getElementById('modalImg').src = imgPath;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('productModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').style.display = "none";
+        }
+
+        // Close if you click outside the white box
+        window.onclick = function(event) {
+            let modal = document.getElementById('productModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 
 </body>
 </html>
+
 
 
 
