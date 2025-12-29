@@ -76,12 +76,10 @@
         }
 
         .story-section h2 { color: var(--deep-pink); font-size: 32px; margin-bottom: 20px; }
-
         .story-text { font-size: 18px; line-height: 1.8; max-width: 800px; margin: 0 auto; }
 
         /* 6. PRODUCT SECTION */
         .products-section { padding: 60px 10%; }
-
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -98,7 +96,6 @@
             transition: transform 0.3s;
             cursor: pointer;
         }
-
         .product-card:hover { transform: translateY(-10px); }
 
         .image-placeholder {
@@ -110,9 +107,7 @@
         }
 
         .product-price { font-size: 20px; font-weight: bold; color: var(--deep-pink); margin: 10px 0; display: block; }
-
         .product-price strike { font-size: 14px; color: #888; margin-right: 5px; font-weight: normal; }
-
         .status-badge {
             display: inline-block; padding: 5px 15px; border-radius: 50px;
             font-size: 12px; font-weight: bold; margin-top: 10px;
@@ -121,12 +116,10 @@
 
         /* 7. CUSTOM INFO & FOOTER */
         .custom-info { background-color: var(--baby-pink); padding: 40px; text-align: center; margin: 40px 0; }
-
         footer { padding: 60px 10%; text-align: center; background-color: #333; color: white; }
-
         footer h2 { color: var(--baby-pink); }
 
-        /* 8. ZOOM MODAL & CART SIDEBAR */
+        /* 8. MODALS & SIDEBAR */
         .modal {
             display: none; position: fixed; z-index: 2000;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -144,6 +137,7 @@
         }
         .cart-sidebar.active { right: 0; }
         .cart-items-list { flex-grow: 1; overflow-y: auto; margin: 20px 0; text-align: left; }
+        .remove-btn { color: #ff4444; background: none; border: none; cursor: pointer; font-size: 12px; text-decoration: underline; }
         .btn {
             display: inline-block; padding: 12px 25px; background: var(--deep-pink);
             color: white; text-decoration: none; border-radius: 25px;
@@ -161,7 +155,7 @@
     </nav>
 
     <header>
-        <img src="threaded_tales_logo.png" alt="Threaded Tales Logo" class="logo-image">
+        <img src="your-logo.png" alt="Threaded Tales Logo" class="logo-image">
         <h1>Threaded Tales</h1>
         <p>A Yawning Hook waking up to new stories.</p>
     </header>
@@ -177,7 +171,6 @@
     <section id="products" class="products-section">
         <h2 style="text-align:center;">The Collection</h2>
         <div class="product-grid">
-            
             <div class="product-card" onclick="openZoom('blanket.jpg', 'Baby Tale Blanket', '₹1200', 'Signature baby pink soft stitch.')">
                 <div class="image-placeholder">Add Image 1 Here</div>
                 <h3>Baby Tale Blanket</h3>
@@ -201,7 +194,6 @@
                 <p>Your choice of colors and size.</p>
                 <span class="status-badge instock">In Stock</span>
             </div>
-
         </div>
 
         <div class="custom-info">
@@ -228,17 +220,26 @@
         </div>
     </div>
 
+    <div id="thanksModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: var(--deep-pink);">✨ Thank You! ✨</h2>
+            <p>Your order list is ready. We are now moving to WhatsApp to finalize your tale!</p>
+            <button class="btn" id="confirmWhatsApp">Okay, Let's Go!</button>
+        </div>
+    </div>
+
     <div id="cartSidebar" class="cart-sidebar">
         <h2>Your Basket</h2>
         <div id="cartItemsList" class="cart-items-list"></div>
         <div style="font-weight:bold; font-size: 20px;">Total: ₹<span id="cartTotal">0</span></div>
-        <button class="btn" style="background:#333; width:100%; margin-top:20px;" onclick="checkoutWhatsApp()">Checkout on WhatsApp</button>
+        <button class="btn" style="background:#333; width:100%; margin-top:20px;" onclick="showThanks()">Checkout on WhatsApp</button>
         <p onclick="toggleCart()" style="text-align:center; cursor:pointer; margin-top:20px;">Continue Shopping</p>
     </div>
 
     <script>
         let cart = [];
         let currentItem = {};
+        let finalWhatsAppUrl = "";
 
         function openZoom(img, title, price, desc) {
             currentItem = { title, price: parseInt(price.replace('₹','')), rawPrice: price };
@@ -249,7 +250,6 @@
         }
 
         function closeModal() { document.getElementById('productModal').style.display = 'none'; }
-
         function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); }
 
         function addToCart() {
@@ -259,31 +259,52 @@
             toggleCart();
         }
 
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
         function updateCartUI() {
             const list = document.getElementById('cartItemsList');
             const totalDisplay = document.getElementById('cartTotal');
             const countDisplay = document.getElementById('cart-count');
             list.innerHTML = "";
             let total = 0;
-            cart.forEach(item => {
+            cart.forEach((item, index) => {
                 total += item.price;
-                list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span>${item.title}</span><span>₹${item.price}</span></div>`;
+                list.innerHTML += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <div><strong>${item.title}</strong><br><button class="remove-btn" onclick="removeFromCart(${index})">Remove</button></div>
+                    <span>₹${item.price}</span></div>`;
             });
             totalDisplay.innerText = total;
             countDisplay.innerText = cart.length;
         }
 
-        function checkoutWhatsApp() {
+        // NEW: Show Thank You and Prepare Link
+        function showThanks() {
             if(cart.length === 0) return alert("Your cart is empty!");
+            
             let message = "Hello Threaded Tales! I'd like to order:%0A";
             cart.forEach(item => message += `- ${item.title} (${item.rawPrice})%0A`);
             message += `%0ATotal: ₹${document.getElementById('cartTotal').innerText}`;
-            window.open(`https://wa.me/919072573410?text=${message}`, '_blank');
+            
+            finalWhatsAppUrl = `https://wa.me/911234567890?text=${message}`; // REPLACE NUMBER
+            
+            document.getElementById('thanksModal').style.display = 'flex';
         }
-    </script>
 
+        document.getElementById('confirmWhatsApp').onclick = function() {
+            window.open(finalWhatsAppUrl, '_blank');
+            document.getElementById('thanksModal').style.display = 'none';
+            // Clear cart after checkout
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        };
+    </script>
 </body>
 </html>
+
 
 
 
