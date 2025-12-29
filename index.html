@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threaded Tales | Our Story</title>
     <style>
-        /* 1. THEME COLORS - The "Paint Palette" */
+        /* 1. THEME COLORS */
         :root {
             --baby-pink: #F4C2C2;
             --deep-pink: #ef9a9a;
             --soft-cream: #FFFaf0;
             --text-grey: #444;
+            --accent-pink: #d88080;
         }
 
-        /* 2. BASE STYLES - The "Foundation" */
+        /* 2. BASE STYLES */
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -23,12 +24,12 @@
             scroll-behavior: smooth;
         }
 
-        /* 3. NAVIGATION - The "Map" */
+        /* 3. NAVIGATION */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 15px 0;
             display: flex;
             justify-content: center;
@@ -44,42 +45,46 @@
             text-transform: uppercase;
             font-size: 14px;
             letter-spacing: 1px;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--baby-pink);
+            color: var(--deep-pink);
         }
 
         /* 4. HEADER & LOGO */
         header {
             background-color: var(--baby-pink);
-            height: 60vh;
+            height: 65vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding-top: 60px;
+            /* Added organic curve to bottom */
+            border-bottom-left-radius: 50% 10%;
+            border-bottom-right-radius: 50% 10%;
         }
 
-        /* This is the new style for your logo image */
         .logo-image {
-            height: 120px; 
+            height: 140px; 
             width: auto;
             margin-bottom: 15px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
         /* 5. STORY SECTION */
         .story-section {
-            padding: 80px 15%;
+            padding: 100px 15%;
             text-align: center;
             background-color: white;
         }
 
         .story-section h2 {
             color: var(--deep-pink);
-            font-size: 32px;
-            margin-bottom: 20px;
+            font-size: 36px;
+            margin-bottom: 25px;
         }
 
         .story-text {
@@ -91,86 +96,106 @@
 
         /* 6. PRODUCT SECTION & CARDS */
         .products-section {
-            padding: 60px 10%;
+            padding: 80px 10%;
         }
 
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 35px;
+            margin-top: 50px;
         }
 
         .product-card {
             background: white;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 25px;
+            padding: 25px;
             text-align: center;
             border: 1px solid #eee;
-            transition: transform 0.3s;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
 
-        .image-placeholder {
+        .product-image {
             width: 100%;
             height: 250px;
-            background-color: #f9f9f9;
+            object-fit: cover;
             border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin-bottom: 15px;
-            color: #ccc;
+            background-color: #f9f9f9;
         }
 
-        /* This is the price style you added! */
         .product-price {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             color: var(--deep-pink);
             margin: 10px 0;
             display: block;
         }
 
-        /* This styles the crossed-out old price */
         .product-price strike {
-            font-size: 14px;
-            color: #888;
-            margin-right: 5px;
+            font-size: 15px;
+            color: #aaa;
+            margin-right: 8px;
             font-weight: normal;
         }
 
         .status-badge {
             display: inline-block;
-            padding: 5px 15px;
+            padding: 6px 18px;
             border-radius: 50px;
             font-size: 12px;
             font-weight: bold;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .instock { background: #e8f5e9; color: #2e7d32; }
         .outstock { background: #ffebee; color: #c62828; }
 
-        /* 7. CUSTOM INFO & FOOTER */
+        /* 7. CUSTOM INFO & BUTTONS */
         .custom-info {
             background-color: var(--baby-pink);
-            padding: 40px;
+            padding: 60px 40px;
             text-align: center;
-            margin: 40px 0;
+            margin: 60px 0;
+            border-radius: 20px;
         }
 
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: white;
+            color: var(--deep-pink);
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cta-button:hover {
+            background-color: var(--deep-pink);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* 8. FOOTER */
         footer {
-            padding: 60px 10%;
+            padding: 80px 10%;
             text-align: center;
             background-color: #333;
             color: white;
         }
 
-        footer h2 { color: var(--baby-pink); }
+        footer h2 { color: var(--baby-pink); margin-bottom: 20px; }
+        .contact-link { color: white; text-decoration: none; opacity: 0.8; }
+        .contact-link:hover { opacity: 1; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -182,7 +207,7 @@
     </nav>
 
     <header>
-        <img src="threaded_tales_logo.png" alt="Threaded Tales Logo" class="logo-image">
+        <img src="your-logo.png" alt="Threaded Tales Logo" class="logo-image">
         <h1>Threaded Tales</h1>
         <p>A Yawning Hook waking up to new stories.</p>
     </header>
@@ -196,11 +221,11 @@
     </section>
 
     <section id="products" class="products-section">
-        <h2 style="text-align:center;">The Collection</h2>
+        <h2 style="text-align:center; color: var(--deep-pink); font-size: 32px;">The Collection</h2>
         <div class="product-grid">
             
             <div class="product-card">
-                <div class="image-placeholder">Add Image 1 Here</div>
+                <img src="blanket.jpg" alt="Baby Tale Blanket" class="product-image">
                 <h3>Baby Tale Blanket</h3>
                 <span class="product-price">₹1,200</span>
                 <p>Signature baby pink soft stitch.</p>
@@ -208,7 +233,7 @@
             </div>
 
             <div class="product-card">
-                <img src="chrochet_flower.jpeg" alt="Flower Hairclip" style="width:100%; border-radius:15px;">
+                <img src="chrochet_flower.jpeg" alt="Flower Hairclip" class="product-image">
                 <h3>Ever-Bloom Hairclip</h3>
                 <span class="product-price"><strike>₹30</strike> ₹15.00</span>
                 <p>Hand-hooked blooms that never fade.</p>
@@ -216,7 +241,7 @@
             </div>
 
             <div class="product-card">
-                <div class="image-placeholder">Add Image 3 Here</div>
+                <img src="beanie.jpg" alt="Custom Beanie" class="product-image">
                 <h3>Custom Beanie</h3>
                 <span class="product-price">₹450</span>
                 <p>Your choice of colors and size.</p>
@@ -227,21 +252,21 @@
 
         <div class="custom-info">
             <h3>✨ Everything is Customizable! ✨</h3>
-            <p>Love a design but want a different color? Reach out!</p>
+            <p>Love a design but want a different color? We'd love to hook it for you.</p>
+            <a href="mailto:hello@threadedtales.com" class="cta-button">Request a Custom Order</a>
         </div>
     </section>
 
     <footer id="contact">
         <h2>Let's Start Your Tale</h2>
-        <p>Email: hello@threadedtales.com</p>
-        <p>Instagram: @ThreadedTales_Crochet</p>
+        <p>Email: <a href="mailto:hello@threadedtales.com" class="contact-link">hello@threadedtales.com</a></p>
+        <p>Instagram: <a href="https://instagram.com" class="contact-link">@ThreadedTales_Crochet</a></p>
         <br>
         <p style="font-size: 12px; opacity: 0.6;">&copy; 2024 Threaded Tales. Hand-hooked with love.</p>
     </footer>
 
 </body>
 </html>
-
 
 
 
