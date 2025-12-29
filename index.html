@@ -10,7 +10,7 @@
             --deep-pink: #ef9a9a;
             --soft-cream: #FFFaf0;
             --text-grey: #444;
-            --white-glass: rgba(255, 255, 255, 0.8);
+            --white-glass: rgba(255, 255, 255, 0.85);
         }
 
         body {
@@ -22,17 +22,17 @@
             overflow-x: hidden;
         }
 
-        /* ENHANCEMENT: Glassmorphism Nav */
+        /* NAVIGATION - Glass Effect */
         nav {
             position: fixed;
             top: 0; width: 100%;
             background-color: var(--white-glass);
-            backdrop-filter: blur(10px); /* Blurs the background behind nav */
+            backdrop-filter: blur(10px);
             padding: 15px 0;
             display: flex;
             justify-content: center;
-            gap: 30px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            gap: 25px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
             z-index: 1000;
         }
 
@@ -43,19 +43,16 @@
             text-transform: uppercase;
             font-size: 13px;
             letter-spacing: 1px;
-            transition: 0.3s;
         }
-
-        nav a:hover { color: var(--deep-pink); }
 
         .cart-link {
             background: var(--deep-pink);
-            padding: 6px 18px;
+            padding: 5px 15px;
             border-radius: 50px;
             color: white !important;
-            box-shadow: 0 4px 10px rgba(239, 154, 154, 0.3);
         }
 
+        /* HEADER */
         header {
             background-color: var(--baby-pink);
             height: 60vh;
@@ -64,28 +61,21 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding-top: 60px;
-            clip-path: ellipse(100% 100% at 50% 0%); /* Subtle curved bottom */
+            clip-path: ellipse(120% 100% at 50% 0%);
         }
 
-        .logo-image { 
-            height: 120px; 
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
-            transition: 0.5s ease;
-        }
-        .logo-image:hover { transform: scale(1.1) rotate(5deg); }
+        .logo-image { height: 110px; margin-bottom: 15px; }
 
-        .story-section {
-            padding: 100px 15%;
-            text-align: center;
-            background-color: white;
-        }
+        /* STORY SECTION */
+        .story-section { padding: 80px 15%; text-align: center; background-color: white; }
+        .story-section h2 { color: var(--deep-pink); font-size: 32px; }
 
+        /* PRODUCT GRID */
+        .products-section { padding: 60px 10%; }
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            padding: 60px 10%;
+            gap: 30px;
         }
 
         .product-card {
@@ -93,47 +83,38 @@
             border-radius: 25px;
             padding: 25px;
             text-align: center;
-            border: 1px solid rgba(0,0,0,0.03);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #eee;
+            transition: 0.4s;
             cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
         }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
 
-        /* ENHANCEMENT: Card Hover Effect */
-        .product-card:hover { 
-            transform: translateY(-15px); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
+        .product-image { width: 100%; height: 250px; object-fit: cover; border-radius: 20px; }
+        .product-price { font-size: 22px; font-weight: bold; color: var(--deep-pink); margin: 10px 0; display: block; }
+        .product-price strike { font-size: 14px; color: #888; font-weight: normal; margin-right: 5px; }
 
-        .image-placeholder, img {
-            width: 100%; height: 260px;
-            object-fit: cover;
-            border-radius: 20px;
-            margin-bottom: 15px;
-        }
-
-        .product-price { font-size: 22px; font-weight: 800; color: var(--deep-pink); }
-        .product-price strike { font-size: 14px; color: #bbb; font-weight: 400; }
-
-        /* SIDEBAR & MODAL */
-        .modal, .cart-sidebar {
-            /* Styles remain largely the same for functionality */
+        /* MODALS & SIDEBAR */
+        .modal {
             display: none; position: fixed; z-index: 2000;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8); justify-content: center; align-items: center;
         }
+        .modal-content {
+            background: white; padding: 35px; border-radius: 30px;
+            width: 90%; max-width: 400px; text-align: center; position: relative;
+        }
         .cart-sidebar {
-            display: flex; right: -400px; width: 350px; background: white; 
-            transition: 0.5s; padding: 40px; flex-direction: column;
+            position: fixed; top: 0; right: -400px;
+            width: 320px; height: 100%; background: white;
+            z-index: 3000; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: 0.4s; padding: 30px; display: flex; flex-direction: column;
         }
         .cart-sidebar.active { right: 0; }
-
         .btn {
-            display: inline-block; padding: 15px 30px; background: var(--deep-pink);
-            color: white; text-decoration: none; border-radius: 50px;
-            font-weight: bold; border: none; cursor: pointer; transition: 0.3s;
+            display: inline-block; padding: 12px 25px; background: var(--deep-pink);
+            color: white; text-decoration: none; border-radius: 25px;
+            font-weight: bold; border: none; cursor: pointer;
         }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(239, 154, 154, 0.4); }
     </style>
 </head>
 <body>
@@ -141,45 +122,72 @@
     <nav>
         <a href="#story">Our Story</a>
         <a href="#products">Products</a>
-        <a href="javascript:void(0)" onclick="toggleCart()" class="cart-link">🛒 My Cart (<span id="cart-count">0</span>)</a>
+        <a href="#contact">Contact</a>
+        <a href="javascript:void(0)" onclick="toggleCart()" class="cart-link">🛒 Cart (<span id="cart-count">0</span>)</a>
     </nav>
 
     <header>
-        <img src="your-logo.png" alt="Threaded Tales" class="logo-image">
-        <h1 style="letter-spacing: 2px;">Threaded Tales</h1>
-        <p style="font-style: italic; opacity: 0.8;">A Yawning Hook waking up to new stories.</p>
+        <img src="your-logo.png" alt="Logo" class="logo-image">
+        <h1>Threaded Tales</h1>
+        <p>A Yawning Hook waking up to new stories.</p>
     </header>
 
-    <section id="products" class="product-grid">
-        <div class="product-card" onclick="openZoom('blanket.jpg', 'Baby Tale Blanket', '₹1200', 'Signature baby pink soft stitch.')">
-            <div class="image-placeholder" style="background:#eee">Blanket Photo</div>
-            <h3>Baby Tale Blanket</h3>
-            <span class="product-price">₹1,200</span>
+    <section id="story" class="story-section">
+        <h2>How It All Began</h2>
+        <div class="story-text">
+            <p>Every great tale starts with a single thread. <strong>Threaded Tales</strong> was born in a quiet nursery, inspired by the softest baby pink yarn and the rhythmic click of a crochet hook.</p>
         </div>
-        </section>
+    </section>
+
+    <section id="products" class="products-section">
+        <div class="product-grid">
+            <div class="product-card" onclick="openZoom('blanket.jpg', 'Baby Tale Blanket', '₹1200', 'Signature baby pink soft stitch.')">
+                <img src="blanket.jpg" class="product-image">
+                <h3>Baby Tale Blanket</h3>
+                <span class="product-price">₹1,200</span>
+            </div>
+
+            <div class="product-card" onclick="openZoom('chrochet_flower.jpeg', 'Ever-Bloom Hairclip', '₹15', 'Hand-hooked blooms.')">
+                <img src="chrochet_flower.jpeg" class="product-image">
+                <h3>Ever-Bloom Hairclip</h3>
+                <span class="product-price"><strike>₹30</strike> ₹15.00</span>
+            </div>
+
+            <div class="product-card" onclick="openZoom('beanie.jpg', 'Custom Beanie', '₹450', 'Custom colors and size.')">
+                <img src="beanie.jpg" class="product-image">
+                <h3>Custom Beanie</h3>
+                <span class="product-price">₹450</span>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" style="background:#333; color:white; padding: 60px 10%; text-align:center;">
+        <h2>Let's Start Your Tale</h2>
+        <p>Email: hello@threadedtales.com</p>
+        <p>Instagram: @ThreadedTales_Crochet</p>
+    </footer>
 
     <div id="productModal" class="modal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()" style="background:white; padding:40px; border-radius:30px; text-align:center; max-width:400px;">
-            <h2 id="modalTitle"></h2>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h2 id="modalTitle" style="color: var(--deep-pink);"></h2>
             <p id="modalPrice" class="product-price"></p>
             <button class="btn" onclick="addToCart()">Add to Basket</button>
         </div>
     </div>
 
     <div id="thanksModal" class="modal">
-        <div class="modal-content" style="background:white; padding:40px; border-radius:30px; text-align:center;">
+        <div class="modal-content">
             <h2>✨ Order Ready! ✨</h2>
             <p>Order ID: <strong id="orderID"></strong></p>
-            <p>Redirecting to WhatsApp to complete your purchase...</p>
-            <button class="btn" id="confirmWhatsApp">Open WhatsApp</button>
+            <button class="btn" id="confirmWhatsApp">Go to WhatsApp</button>
         </div>
     </div>
 
     <div id="cartSidebar" class="cart-sidebar">
         <h2>Your Basket</h2>
-        <div id="cartItemsList" style="flex-grow:1"></div>
-        <div style="font-size:24px; font-weight:bold; margin-bottom:20px;">Total: ₹<span id="cartTotal">0</span></div>
-        <button class="btn" style="background:#333" onclick="showThanks()">Checkout Now</button>
+        <div id="cartItemsList" style="flex-grow:1; overflow-y:auto;"></div>
+        <div style="font-weight:bold; font-size: 20px;">Total: ₹<span id="cartTotal">0</span></div>
+        <button class="btn" style="background:#333; width:100%; margin-top:20px;" onclick="showThanks()">Checkout</button>
     </div>
 
     <script>
@@ -187,7 +195,7 @@
         let currentItem = {};
 
         function openZoom(img, title, price, desc) {
-            currentItem = { title, price: parseInt(price.replace('₹','').replace(',','')), rawPrice: price };
+            currentItem = { title, price: parseInt(price.replace('₹','')), rawPrice: price };
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = price;
             document.getElementById('productModal').style.display = 'flex';
@@ -209,7 +217,10 @@
             list.innerHTML = "";
             cart.forEach((item, i) => {
                 total += item.price;
-                list.innerHTML += `<p>${item.title} - ₹${item.price} <span onclick="cart.splice(${i},1); updateUI()" style="color:red; cursor:pointer; font-size:10px;">[Remove]</span></p>`;
+                list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                    <span>${item.title}</span>
+                    <span onclick="cart.splice(${i},1); updateUI()" style="color:red; cursor:pointer;">X</span>
+                </div>`;
             });
             document.getElementById('cartTotal').innerText = total;
             document.getElementById('cart-count').innerText = cart.length;
@@ -217,29 +228,18 @@
 
         function showThanks() {
             if(cart.length === 0) return;
-            // ENHANCEMENT: Generate Order ID
             const id = "TT-" + Math.floor(1000 + Math.random() * 9000);
             document.getElementById('orderID').innerText = id;
-            
-            let message = `*Order ${id}*%0A---%0A`;
-            cart.forEach(item => message += `- ${item.title}%0A`);
-            message += `%0A*Total:* ₹${document.getElementById('cartTotal').innerText}`;
-            
-            const url = `https://wa.me/911234567890?text=${message}`;
-            
             document.getElementById('thanksModal').style.display = 'flex';
-            document.getElementById('confirmWhatsApp').onclick = () => { window.open(url, '_blank'); };
+            document.getElementById('confirmWhatsApp').onclick = () => {
+                let msg = `*Order ${id}*%0A`;
+                cart.forEach(item => msg += `- ${item.title}%0A`);
+                window.open(`https://wa.me/911234567890?text=${msg}`, '_blank');
+            };
         }
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
