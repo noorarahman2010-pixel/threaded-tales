@@ -196,6 +196,50 @@
         footer h2 { color: var(--baby-pink); margin-bottom: 20px; }
         .contact-link { color: white; text-decoration: none; opacity: 0.8; }
         .contact-link:hover { opacity: 1; text-decoration: underline; }
+        /* The Zoom Overlay (Hidden by default) */
+.product-modal {
+    display: none; /* Hidden */
+    position: fixed;
+    z-index: 2000; /* Sits on top of everything */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Box inside the Zoom */
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    animation: zoomIn 0.3s ease; /* Smooth pop-in effect */
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #888;
+}
     </style>
 </head>
 <body>
@@ -232,13 +276,12 @@
                 <span class="status-badge instock">In Stock</span>
             </div>
 
-            <div class="product-card">
-                <img src="chrochet_flower.jpeg" alt="Flower Hairclip" class="product-image">
-                <h3>Ever-Bloom Hairclip</h3>
-                <span class="product-price"><strike>₹30</strike> ₹15.00</span>
-                <p>Hand-hooked blooms that never fade.</p>
-                <span class="status-badge instock">In Stock</span>
-            </div>
+            <div class="product-card" onclick="zoomProduct('chrochet_flower.jpeg', 'Ever-Bloom Hairclip', '₹15.00', 'Hand-hooked blooms that never fade.')">
+    <img src="chrochet_flower.jpeg" alt="Flower Hairclip" class="product-image">
+    <h3>Ever-Bloom Hairclip</h3>
+    <span class="product-price">₹15.00</span>
+    <p>Click to see details</p>
+</div>
 
             <div class="product-card">
                 <img src="beanie.jpg" alt="Custom Beanie" class="product-image">
@@ -264,9 +307,41 @@
         <br>
         <p style="font-size: 12px; opacity: 0.6;">&copy; 2024 Threaded Tales. Hand-hooked with love.</p>
     </footer>
+<div id="productModal" class="product-modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-btn">&times;</span>
+        <img id="modalImg" src="" alt="Zoomed Product">
+        <h3 id="modalTitle"></h3>
+        <span id="modalPrice" class="product-price"></span>
+        <p id="modalDesc"></p>
+    </div>
+</div>
+   <script>
+    function zoomProduct(image, title, price, desc) {
+        // 1. Find the modal elements
+        const modal = document.getElementById('productModal');
+        const mImg = document.getElementById('modalImg');
+        const mTitle = document.getElementById('modalTitle');
+        const mPrice = document.getElementById('modalPrice');
+        const mDesc = document.getElementById('modalDesc');
 
+        // 2. Fill them with the clicked product's info
+        mImg.src = image;
+        mTitle.innerText = title;
+        mPrice.innerText = price;
+        mDesc.innerText = desc;
+
+        // 3. Show the modal
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('productModal').style.display = 'none';
+    }
+</script> 
 </body>
 </html>
+
 
 
 
