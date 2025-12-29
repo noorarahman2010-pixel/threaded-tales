@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threaded Tales | Our Story</title>
     <style>
-        /* 1. THEME COLORS */
         :root {
             --baby-pink: #F4C2C2;
             --deep-pink: #ef9a9a;
             --soft-cream: #FFFaf0;
             --text-grey: #444;
+            --white-glass: rgba(255, 255, 255, 0.8);
         }
 
-        /* 2. BASE STYLES */
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0; padding: 0;
@@ -23,16 +22,17 @@
             overflow-x: hidden;
         }
 
-        /* 3. NAVIGATION */
+        /* ENHANCEMENT: Glassmorphism Nav */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            background-color: white;
+            background-color: var(--white-glass);
+            backdrop-filter: blur(10px); /* Blurs the background behind nav */
             padding: 15px 0;
             display: flex;
             justify-content: center;
             gap: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
             z-index: 1000;
         }
 
@@ -41,20 +41,21 @@
             color: var(--text-grey);
             font-weight: bold;
             text-transform: uppercase;
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 1px;
+            transition: 0.3s;
         }
 
-        nav a:hover { color: var(--baby-pink); }
+        nav a:hover { color: var(--deep-pink); }
 
         .cart-link {
-            background: var(--baby-pink);
-            padding: 5px 15px;
+            background: var(--deep-pink);
+            padding: 6px 18px;
             border-radius: 50px;
             color: white !important;
+            box-shadow: 0 4px 10px rgba(239, 154, 154, 0.3);
         }
 
-        /* 4. HEADER */
         header {
             background-color: var(--baby-pink);
             height: 60vh;
@@ -64,85 +65,75 @@
             align-items: center;
             text-align: center;
             padding-top: 60px;
+            clip-path: ellipse(100% 100% at 50% 0%); /* Subtle curved bottom */
         }
 
-        .logo-image { height: 120px; width: auto; margin-bottom: 15px; }
+        .logo-image { 
+            height: 120px; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+            transition: 0.5s ease;
+        }
+        .logo-image:hover { transform: scale(1.1) rotate(5deg); }
 
-        /* 5. STORY SECTION */
         .story-section {
-            padding: 80px 15%;
+            padding: 100px 15%;
             text-align: center;
             background-color: white;
         }
 
-        .story-section h2 { color: var(--deep-pink); font-size: 32px; margin-bottom: 20px; }
-        .story-text { font-size: 18px; line-height: 1.8; max-width: 800px; margin: 0 auto; }
-
-        /* 6. PRODUCT SECTION */
-        .products-section { padding: 60px 10%; }
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 40px;
+            padding: 60px 10%;
         }
 
         .product-card {
             background: white;
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 25px;
+            padding: 25px;
             text-align: center;
-            border: 1px solid #eee;
-            transition: transform 0.3s;
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
-        }
-        .product-card:hover { transform: translateY(-10px); }
-
-        .image-placeholder {
-            width: 100%; height: 250px;
-            background-color: #f9f9f9;
-            border-radius: 15px;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 15px; color: #ccc;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
         }
 
-        .product-price { font-size: 20px; font-weight: bold; color: var(--deep-pink); margin: 10px 0; display: block; }
-        .product-price strike { font-size: 14px; color: #888; margin-right: 5px; font-weight: normal; }
-        .status-badge {
-            display: inline-block; padding: 5px 15px; border-radius: 50px;
-            font-size: 12px; font-weight: bold; margin-top: 10px;
+        /* ENHANCEMENT: Card Hover Effect */
+        .product-card:hover { 
+            transform: translateY(-15px); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
-        .instock { background: #e8f5e9; color: #2e7d32; }
 
-        /* 7. CUSTOM INFO & FOOTER */
-        .custom-info { background-color: var(--baby-pink); padding: 40px; text-align: center; margin: 40px 0; }
-        footer { padding: 60px 10%; text-align: center; background-color: #333; color: white; }
-        footer h2 { color: var(--baby-pink); }
+        .image-placeholder, img {
+            width: 100%; height: 260px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
 
-        /* 8. MODALS & SIDEBAR */
-        .modal {
+        .product-price { font-size: 22px; font-weight: 800; color: var(--deep-pink); }
+        .product-price strike { font-size: 14px; color: #bbb; font-weight: 400; }
+
+        /* SIDEBAR & MODAL */
+        .modal, .cart-sidebar {
+            /* Styles remain largely the same for functionality */
             display: none; position: fixed; z-index: 2000;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.8); justify-content: center; align-items: center;
         }
-        .modal-content {
-            background: white; padding: 30px; border-radius: 25px;
-            width: 90%; max-width: 450px; text-align: center; position: relative;
-        }
         .cart-sidebar {
-            position: fixed; top: 0; right: -400px;
-            width: 320px; height: 100%; background: white;
-            z-index: 3000; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: 0.4s; padding: 30px; display: flex; flex-direction: column;
+            display: flex; right: -400px; width: 350px; background: white; 
+            transition: 0.5s; padding: 40px; flex-direction: column;
         }
         .cart-sidebar.active { right: 0; }
-        .cart-items-list { flex-grow: 1; overflow-y: auto; margin: 20px 0; text-align: left; }
-        .remove-btn { color: #ff4444; background: none; border: none; cursor: pointer; font-size: 12px; text-decoration: underline; }
+
         .btn {
-            display: inline-block; padding: 12px 25px; background: var(--deep-pink);
-            color: white; text-decoration: none; border-radius: 25px;
-            font-weight: bold; border: none; cursor: pointer; margin-top: 10px;
+            display: inline-block; padding: 15px 30px; background: var(--deep-pink);
+            color: white; text-decoration: none; border-radius: 50px;
+            font-weight: bold; border: none; cursor: pointer; transition: 0.3s;
         }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(239, 154, 154, 0.4); }
     </style>
 </head>
 <body>
@@ -150,102 +141,55 @@
     <nav>
         <a href="#story">Our Story</a>
         <a href="#products">Products</a>
-        <a href="#contact">Contact</a>
-        <a href="javascript:void(0)" onclick="toggleCart()" class="cart-link">🛒 Cart (<span id="cart-count">0</span>)</a>
+        <a href="javascript:void(0)" onclick="toggleCart()" class="cart-link">🛒 My Cart (<span id="cart-count">0</span>)</a>
     </nav>
 
     <header>
-        <img src="threaded_tales_logo.png" alt="Threaded Tales Logo" class="logo-image">
-        <h1>Threaded Tales</h1>
-        <p>A Yawning Hook waking up to new stories.</p>
+        <img src="your-logo.png" alt="Threaded Tales" class="logo-image">
+        <h1 style="letter-spacing: 2px;">Threaded Tales</h1>
+        <p style="font-style: italic; opacity: 0.8;">A Yawning Hook waking up to new stories.</p>
     </header>
 
-    <section id="story" class="story-section">
-        <h2>How It All Began</h2>
-        <div class="story-text">
-            <p>Every great tale starts with a single thread. <strong>Threaded Tales</strong> was born in a quiet nursery, inspired by the softest baby pink yarn and the rhythmic click of a crochet hook.</p>
-            <p>Our symbol—the <strong>Yawning Hook</strong>—represents that magical moment of creativity waking up.</p>
+    <section id="products" class="product-grid">
+        <div class="product-card" onclick="openZoom('blanket.jpg', 'Baby Tale Blanket', '₹1200', 'Signature baby pink soft stitch.')">
+            <div class="image-placeholder" style="background:#eee">Blanket Photo</div>
+            <h3>Baby Tale Blanket</h3>
+            <span class="product-price">₹1,200</span>
         </div>
-    </section>
-
-    <section id="products" class="products-section">
-        <h2 style="text-align:center;">The Collection</h2>
-        <div class="product-grid">
-            <div class="product-card" onclick="openZoom('blanket.jpg', 'Baby Tale Blanket', '₹1200', 'Signature baby pink soft stitch.')">
-                <div class="image-placeholder">Add Image 1 Here</div>
-                <h3>Baby Tale Blanket</h3>
-                <span class="product-price">₹1,200</span>
-                <p>Signature baby pink soft stitch.</p>
-                <span class="status-badge instock">In Stock</span>
-            </div>
-
-            <div class="product-card" onclick="openZoom('chrochet_flower.jpeg', 'Ever-Bloom Hairclip', '₹15', 'Hand-hooked blooms that never fade.')">
-                <img src="chrochet_flower.jpeg" alt="Flower Hairclip" style="width:100%; border-radius:15px;">
-                <h3>Ever-Bloom Hairclip</h3>
-                <span class="product-price"><strike>₹30</strike> ₹15.00</span>
-                <p>Hand-hooked blooms that never fade.</p>
-                <span class="status-badge instock">In Stock</span>
-            </div>
-
-            <div class="product-card" onclick="openZoom('beanie.jpg', 'Custom Beanie', '₹450', 'Your choice of colors and size.')">
-                <div class="image-placeholder">Add Image 3 Here</div>
-                <h3>Custom Beanie</h3>
-                <span class="product-price">₹450</span>
-                <p>Your choice of colors and size.</p>
-                <span class="status-badge instock">In Stock</span>
-            </div>
-        </div>
-
-        <div class="custom-info">
-            <h3>✨ Everything is Customizable! ✨</h3>
-            <p>Love a design but want a different color? Reach out!</p>
-        </div>
-    </section>
-
-    <footer id="contact">
-        <h2>Let's Start Your Tale</h2>
-        <p>Email: hello@threadedtales.com</p>
-        <p>Instagram: @ThreadedTales_Crochet</p>
-        <br>
-        <p style="font-size: 12px; opacity: 0.6;">&copy; 2024 Threaded Tales. Hand-hooked with love.</p>
-    </footer>
+        </section>
 
     <div id="productModal" class="modal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <h2 id="modalTitle" style="color: var(--deep-pink);"></h2>
+        <div class="modal-content" onclick="event.stopPropagation()" style="background:white; padding:40px; border-radius:30px; text-align:center; max-width:400px;">
+            <h2 id="modalTitle"></h2>
             <p id="modalPrice" class="product-price"></p>
-            <p id="modalDesc"></p>
-            <button class="btn" onclick="addToCart()">Add to Cart</button>
-            <p onclick="closeModal()" style="cursor:pointer; margin-top:15px; font-size:12px; color:#888;">Close</p>
+            <button class="btn" onclick="addToCart()">Add to Basket</button>
         </div>
     </div>
 
     <div id="thanksModal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: var(--deep-pink);">✨ Thank You! ✨</h2>
-            <p>Your order list is ready. We are now moving to WhatsApp to finalize your tale!</p>
-            <button class="btn" id="confirmWhatsApp">Okay, Let's Go!</button>
+        <div class="modal-content" style="background:white; padding:40px; border-radius:30px; text-align:center;">
+            <h2>✨ Order Ready! ✨</h2>
+            <p>Order ID: <strong id="orderID"></strong></p>
+            <p>Redirecting to WhatsApp to complete your purchase...</p>
+            <button class="btn" id="confirmWhatsApp">Open WhatsApp</button>
         </div>
     </div>
 
     <div id="cartSidebar" class="cart-sidebar">
         <h2>Your Basket</h2>
-        <div id="cartItemsList" class="cart-items-list"></div>
-        <div style="font-weight:bold; font-size: 20px;">Total: ₹<span id="cartTotal">0</span></div>
-        <button class="btn" style="background:#333; width:100%; margin-top:20px;" onclick="showThanks()">Checkout on WhatsApp</button>
-        <p onclick="toggleCart()" style="text-align:center; cursor:pointer; margin-top:20px;">Continue Shopping</p>
+        <div id="cartItemsList" style="flex-grow:1"></div>
+        <div style="font-size:24px; font-weight:bold; margin-bottom:20px;">Total: ₹<span id="cartTotal">0</span></div>
+        <button class="btn" style="background:#333" onclick="showThanks()">Checkout Now</button>
     </div>
 
     <script>
         let cart = [];
         let currentItem = {};
-        let finalWhatsAppUrl = "";
 
         function openZoom(img, title, price, desc) {
-            currentItem = { title, price: parseInt(price.replace('₹','')), rawPrice: price };
+            currentItem = { title, price: parseInt(price.replace('₹','').replace(',','')), rawPrice: price };
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = price;
-            document.getElementById('modalDesc').innerText = desc;
             document.getElementById('productModal').style.display = 'flex';
         }
 
@@ -254,56 +198,42 @@
 
         function addToCart() {
             cart.push(currentItem);
-            updateCartUI();
+            updateUI();
             closeModal();
             toggleCart();
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-
-        function updateCartUI() {
+        function updateUI() {
             const list = document.getElementById('cartItemsList');
-            const totalDisplay = document.getElementById('cartTotal');
-            const countDisplay = document.getElementById('cart-count');
-            list.innerHTML = "";
             let total = 0;
-            cart.forEach((item, index) => {
+            list.innerHTML = "";
+            cart.forEach((item, i) => {
                 total += item.price;
-                list.innerHTML += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                    <div><strong>${item.title}</strong><br><button class="remove-btn" onclick="removeFromCart(${index})">Remove</button></div>
-                    <span>₹${item.price}</span></div>`;
+                list.innerHTML += `<p>${item.title} - ₹${item.price} <span onclick="cart.splice(${i},1); updateUI()" style="color:red; cursor:pointer; font-size:10px;">[Remove]</span></p>`;
             });
-            totalDisplay.innerText = total;
-            countDisplay.innerText = cart.length;
+            document.getElementById('cartTotal').innerText = total;
+            document.getElementById('cart-count').innerText = cart.length;
         }
 
-        // NEW: Show Thank You and Prepare Link
         function showThanks() {
-            if(cart.length === 0) return alert("Your cart is empty!");
+            if(cart.length === 0) return;
+            // ENHANCEMENT: Generate Order ID
+            const id = "TT-" + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('orderID').innerText = id;
             
-            let message = "Hello Threaded Tales! I'd like to order:%0A";
-            cart.forEach(item => message += `- ${item.title} (${item.rawPrice})%0A`);
-            message += `%0ATotal: ₹${document.getElementById('cartTotal').innerText}`;
+            let message = `*Order ${id}*%0A---%0A`;
+            cart.forEach(item => message += `- ${item.title}%0A`);
+            message += `%0A*Total:* ₹${document.getElementById('cartTotal').innerText}`;
             
-            finalWhatsAppUrl = `https://wa.me/919072573410?text=${message}`; // REPLACE NUMBER
+            const url = `https://wa.me/911234567890?text=${message}`;
             
             document.getElementById('thanksModal').style.display = 'flex';
+            document.getElementById('confirmWhatsApp').onclick = () => { window.open(url, '_blank'); };
         }
-
-        document.getElementById('confirmWhatsApp').onclick = function() {
-            window.open(finalWhatsAppUrl, '_blank');
-            document.getElementById('thanksModal').style.display = 'none';
-            // Clear cart after checkout
-            cart = [];
-            updateCartUI();
-            toggleCart();
-        };
     </script>
 </body>
 </html>
+
 
 
 
