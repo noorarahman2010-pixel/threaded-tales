@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threaded Tales | Our Story</title>
     <style>
-        /* --- 1. THEME COLORS & RADIUS --- */
         :root {
             --baby-pink: #F4C2C2;
             --deep-pink: #ef9a9a;
@@ -14,7 +13,6 @@
             --white-glass: rgba(255, 255, 255, 0.85);
         }
 
-        /* --- 2. BASE STYLES --- */
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0; padding: 0;
@@ -24,7 +22,7 @@
             overflow-x: hidden;
         }
 
-        /* --- 3. NAVIGATION (Glassmorphism) --- */
+        /* NAVIGATION */
         nav {
             position: fixed;
             top: 0; width: 100%;
@@ -55,7 +53,7 @@
             box-shadow: 0 4px 10px rgba(239, 154, 154, 0.3);
         }
 
-        /* --- 4. HEADER --- */
+        /* HEADER */
         header {
             background-color: var(--baby-pink);
             height: 60vh;
@@ -69,7 +67,7 @@
 
         .logo-image { height: 110px; margin-bottom: 15px; }
 
-        /* --- 5. STORY SECTION --- */
+        /* STORY SECTION */
         .story-section { padding: 80px 10%; text-align: center; background-color: white; }
         
         .story-box {
@@ -83,7 +81,7 @@
 
         .story-text { font-size: 18px; line-height: 1.8; color: #555; }
 
-        /* --- 6. PRODUCT GRID --- */
+        /* PRODUCT GRID */
         .products-section { padding: 60px 10%; }
         
         .product-grid {
@@ -110,7 +108,7 @@
         
         .product-price strike { font-size: 14px; color: #888; font-weight: normal; margin-right: 5px; }
 
-        /* --- 7. MODALS & CART SIDEBAR --- */
+        /* MODALS */
         .modal {
             display: none; position: fixed; z-index: 2000;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -122,6 +120,7 @@
             width: 90%; max-width: 400px; text-align: center; position: relative;
         }
 
+        /* CART SIDEBAR */
         .cart-sidebar {
             position: fixed; top: 0; right: -400px;
             width: 320px; height: 100%; background: white;
@@ -133,18 +132,14 @@
 
         .cart-items-list { flex-grow: 1; overflow-y: auto; margin: 20px 0; text-align: left; }
 
-        /* --- 8. BUTTONS --- */
         .btn {
             display: inline-block; padding: 12px 25px; background: var(--deep-pink);
             color: white; text-decoration: none; border-radius: 25px;
             font-weight: bold; border: none; cursor: pointer; transition: 0.3s;
         }
 
-        .btn:hover { opacity: 0.9; transform: scale(1.02); }
-
         .remove-link { color: #ff4444; font-size: 12px; cursor: pointer; text-decoration: underline; }
 
-        /* --- 9. FOOTER --- */
         footer { background:#333; color:white; padding: 60px 10%; text-align:center; }
     </style>
 </head>
@@ -158,7 +153,7 @@
     </nav>
 
     <header>
-        <img src="threaded_tales_logo.png" alt="Logo" class="logo-image">
+        <img src="your-logo.png" alt="Logo" class="logo-image">
         <h1>Threaded Tales</h1>
         <p>A Yawning Hook waking up to new stories.</p>
     </header>
@@ -175,25 +170,23 @@
 
     <section id="products" class="products-section">
         <div class="product-grid">
-            
-            <div class="product-card" onclick="openZoom('blanket.jpg', 'Baby Tale Blanket', '₹1200', 'Signature baby pink soft stitch.')">
+            <div class="product-card" onclick="openZoom('blanket.jpg', 'Baby Tale Blanket', '₹1200')">
                 <div class="product-image" style="background:#eee; display:flex; align-items:center; justify-content:center; color:#999;">Blanket Photo</div>
                 <h3>Baby Tale Blanket</h3>
                 <span class="product-price">₹1,200</span>
             </div>
 
-            <div class="product-card" onclick="openZoom('chrochet_flower.jpeg', 'Ever-Bloom Hairclip', '₹15', 'Hand-hooked blooms.')">
+            <div class="product-card" onclick="openZoom('chrochet_flower.jpeg', 'Ever-Bloom Hairclip', '₹15')">
                 <img src="chrochet_flower.jpeg" class="product-image" alt="Hairclip">
                 <h3>Ever-Bloom Hairclip</h3>
                 <span class="product-price"><strike>₹30</strike> ₹15.00</span>
             </div>
 
-            <div class="product-card" onclick="openZoom('beanie.jpg', 'Custom Beanie', '₹450', 'Custom colors and size.')">
+            <div class="product-card" onclick="openZoom('beanie.jpg', 'Custom Beanie', '₹450')">
                 <div class="product-image" style="background:#eee; display:flex; align-items:center; justify-content:center; color:#999;">Beanie Photo</div>
                 <h3>Custom Beanie</h3>
                 <span class="product-price">₹450</span>
             </div>
-
         </div>
     </section>
 
@@ -201,7 +194,6 @@
         <h2>Let's Start Your Tale</h2>
         <p>Email: hello@threadedtales.com</p>
         <p>Instagram: @ThreadedTales_Crochet</p>
-        <p style="margin-top:20px; font-size:12px; opacity:0.6;">&copy; 2024 Threaded Tales</p>
     </footer>
 
     <div id="productModal" class="modal" onclick="closeModal()">
@@ -215,9 +207,9 @@
 
     <div id="thanksModal" class="modal">
         <div class="modal-content">
-            <h2 style="color: var(--deep-pink);">✨ Order Ready! ✨</h2>
-            <p>Order ID: <strong id="orderID"></strong></p>
-            <p>Redirecting to WhatsApp to finalize your purchase.</p>
+            <h2 style="color: var(--deep-pink);">Thank You! ✨</h2>
+            <p>Your items have been carefully bundled up.</p>
+            <p>Ready to send your order via WhatsApp?</p>
             <button class="btn" id="confirmWhatsApp">Open WhatsApp</button>
         </div>
     </div>
@@ -236,15 +228,14 @@
         let cart = [];
         let currentItem = {};
 
-        function openZoom(img, title, price, desc) {
-            currentItem = { title, price: parseInt(price.replace('₹','').replace(',','')), rawPrice: price };
+        function openZoom(img, title, price) {
+            currentItem = { title, price: parseInt(price.replace(/[^\d]/g, '')), rawPrice: price };
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalPrice').innerText = price;
             document.getElementById('productModal').style.display = 'flex';
         }
 
         function closeModal() { document.getElementById('productModal').style.display = 'none'; }
-
         function toggleCart() { document.getElementById('cartSidebar').classList.toggle('active'); }
 
         function addToCart() {
@@ -274,7 +265,7 @@
                             <strong>${item.title}</strong><br>
                             <span class="remove-link" onclick="removeFromCart(${i})">Remove</span>
                         </div>
-                        <span>₹${item.price}</span>
+                        <span>₹${item.price.toLocaleString('en-IN')}</span>
                     </div>`;
             });
             
@@ -284,17 +275,14 @@
 
         function showThanks() {
             if(cart.length === 0) return alert("Your cart is empty!");
-            const id = "TT-" + Math.floor(1000 + Math.random() * 9000);
-            document.getElementById('orderID').innerText = id;
             document.getElementById('thanksModal').style.display = 'flex';
             
             document.getElementById('confirmWhatsApp').onclick = () => {
-                let msg = `*Order ${id}*%0A---%0A`;
+                let msg = `Hi Threaded Tales! I'd like to order:%0A---%0A`;
                 cart.forEach(item => msg += `- ${item.title}%0A`);
-                msg += `%0A*Total:* ₹${document.getElementById('cartTotal').innerText}`;
-                window.open(`https://wa.me/911234567890?text=${msg}`, '_blank'); // Replace with your number!
+                msg += `%0ATotal: ₹${document.getElementById('cartTotal').innerText}%0A---%0ACan you tell me how to pay?`;
+                window.open(`https://wa.me/911234567890?text=${msg}`, '_blank');
                 
-                // Reset site after checkout
                 document.getElementById('thanksModal').style.display = 'none';
                 cart = [];
                 updateUI();
