@@ -59,7 +59,7 @@
             height: 60vh;
             display: flex;
             flex-direction: column;
-            justify(content: center;
+            justify-content: center;
             align-items: center;
             text-align: center;
             clip-path: ellipse(120% 100% at 50% 0%);
@@ -108,7 +108,7 @@
         
         .product-price strike { font-size: 14px; color: #888; font-weight: normal; margin-right: 5px; }
 
-        /* MODALS (FIXED VISIBILITY) */
+        /* MODALS */
         .modal {
             display: none; position: fixed; z-index: 2000;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -124,11 +124,9 @@
             max-width: 350px; 
             text-align: center; 
             position: relative;
-            max-height: 90vh; /* Keeps it within screen height */
-            overflow-y: auto; /* Adds scroll if content is too long */
+            max-height: 90vh;
+            overflow-y: auto;
         }
-
-        .modal-content h2 { margin: 10px 0; font-size: 24px; }
 
         /* CART SIDEBAR */
         .cart-sidebar {
@@ -156,10 +154,8 @@
             transition: 0.3s;
             box-shadow: 0 4px 10px rgba(239, 154, 154, 0.4);
             margin: 10px 0;
-            width: 100%; /* Makes button easier to hit */
+            width: 100%;
         }
-
-        .btn:active { transform: scale(0.95); }
 
         .remove-link { color: #ff4444; font-size: 12px; cursor: pointer; text-decoration: underline; }
 
@@ -185,8 +181,9 @@
         <div class="story-box">
             <h2>Our Story</h2>
             <div class="story-text">
-                <p>Every great tale starts with a single thread. <strong>Threaded Tales</strong> was born in a quiet nursery, inspired by the softest baby pink yarn and the rhythmic click of a crochet hook. It began as a way to turn moments of rest into works of art.</p>
-                <p>Our symbol—the <strong>Yawning Hook</strong>—represents that magical moment of creativity waking up. When a hook strikes the yarn, a story begins to unfold. We believe that every handmade piece carries the warmth and the "tale" of its making, ready to become a part of your story.</p>
+                <p>Every great tale starts with a single thread. <strong>Threaded Tales</strong> was born in a quiet nursery, inspired by the softest baby pink yarn and the rhythmic click of a crochet hook.</p>
+                <p>Our symbol—the <strong>Yawning Hook</strong>—represents that magical moment of creativity waking up. We believe that every handmade piece carries the warmth of its making.</p>
+                <p style="color: var(--deep-pink); font-weight: bold;">✨ Everything you see is 100% customizable to your favorite colors and sizes!</p>
             </div>
         </div>
     </section>
@@ -223,7 +220,10 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <h2 id="modalTitle" style="color: var(--deep-pink);"></h2>
             <p id="modalPrice" class="product-price"></p>
-            <p style="font-size: 14px; color: #777; margin-bottom: 20px;">Handcrafted with love for your story.</p>
+            <p style="font-size: 14px; color: #777; margin-bottom: 15px;">
+                Handcrafted just for you.<br>
+                <strong>Note: This item is fully customizable!</strong>
+            </p>
             <button class="btn" onclick="addToCart()">Add to Basket</button>
             <div onclick="closeModal()" style="cursor:pointer; margin-top:10px; font-size:14px; color:#aaa; text-decoration: underline;">Go Back</div>
         </div>
@@ -304,7 +304,7 @@
             document.getElementById('confirmWhatsApp').onclick = () => {
                 let msg = `Hi Threaded Tales! I'd like to order:%0A---%0A`;
                 cart.forEach(item => msg += `- ${item.title}%0A`);
-                msg += `%0ATotal: ₹${document.getElementById('cartTotal').innerText}%0A---%0ACan you tell me how to pay?`;
+                msg += `%0ATotal: ₹${document.getElementById('cartTotal').innerText}%0A---%0ACan you tell me how to pay? I have some custom requests!`;
                 window.open(`https://wa.me/919072573410?text=${msg}`, '_blank');
                 
                 document.getElementById('thanksModal').style.display = 'none';
