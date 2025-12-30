@@ -304,7 +304,7 @@
             document.getElementById('confirmWhatsApp').onclick = () => {
                 let msg = `Hi Threaded Tales! I'd like to order:%0A---%0A`;
                 cart.forEach(item => msg += `- ${item.title}%0A`);
-                msg += `%0ATotal: ₹${document.getElementById('cartTotal').innerText}%0A---%0ACan you tell me how to pay? I have some custom requests!`;
+                msg += `%0ATotal: ₹${document.getElementById('cartTotal').innerText}%0A---%0ACan you tell me how to pay?`;
                 window.open(`https://wa.me/919072573410?text=${msg}`, '_blank');
                 
                 document.getElementById('thanksModal').style.display = 'none';
@@ -316,6 +316,7 @@
     </script>
 </body>
 </html>
+
 
 
 
